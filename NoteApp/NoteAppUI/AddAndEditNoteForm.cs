@@ -10,17 +10,11 @@ using System.Windows.Forms;
 
 namespace NoteAppUI
 {
-    public partial class MainForm : Form
+    public partial class AddAndEditNoteForm : Form
     {
-        public MainForm()
+        public AddAndEditNoteForm()
         {
             InitializeComponent();
-        }
-
-        private void AddNoteButton_Click_Click(object sender, EventArgs e)
-        {
-            Form addAndEditNoteForm = new AddAndEditNoteForm();
-            addAndEditNoteForm.Show();
         }
     }
 }

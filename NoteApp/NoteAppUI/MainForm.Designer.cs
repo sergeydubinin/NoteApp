@@ -48,7 +48,7 @@
             this.editNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeNoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
+            this.AddNoteButton_Click = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
@@ -81,7 +81,7 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.button3);
             this.splitContainer1.Panel1.Controls.Add(this.button2);
-            this.splitContainer1.Panel1.Controls.Add(this.button1);
+            this.splitContainer1.Panel1.Controls.Add(this.AddNoteButton_Click);
             this.splitContainer1.Panel1.Controls.Add(this.listBox1);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.comboBox1);
@@ -104,7 +104,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // editToolStripMenuItem
@@ -114,7 +114,7 @@
             this.editNoteToolStripMenuItem,
             this.removeNoteToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 26);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // helpToolStripMenuItem
@@ -122,7 +122,7 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // comboBox1
@@ -245,14 +245,15 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // button1
+            // AddNoteButton_Click
             // 
-            this.button1.Location = new System.Drawing.Point(12, 601);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(83, 26);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Add Note";
-            this.button1.UseVisualStyleBackColor = true;
+            this.AddNoteButton_Click.Location = new System.Drawing.Point(12, 601);
+            this.AddNoteButton_Click.Name = "AddNoteButton_Click";
+            this.AddNoteButton_Click.Size = new System.Drawing.Size(83, 26);
+            this.AddNoteButton_Click.TabIndex = 8;
+            this.AddNoteButton_Click.Text = "Add Note";
+            this.AddNoteButton_Click.UseVisualStyleBackColor = true;
+            this.AddNoteButton_Click.Click += new System.EventHandler(this.AddNoteButton_Click_Click);
             // 
             // button2
             // 
@@ -319,7 +320,7 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button AddNoteButton_Click;
     }
 }
 
