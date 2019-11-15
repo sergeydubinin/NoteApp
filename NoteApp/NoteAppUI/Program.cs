@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NoteApp;
 
 namespace NoteAppUI
 {
@@ -14,9 +15,18 @@ namespace NoteAppUI
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Project pr = new Project();
+            Note sd = new Note();
+            sd.Name = "Перваяя заметка";
+            sd.NoteText = "Текст первой заметки";
+            pr.Note.Add(sd);
+            ProjectManager.SaveToFile(pr);
+            Project ss = ProjectManager.LoadFromFile();
+            MessageBox.Show(Convert.ToString(ss.Note[0].Name) + "\n" + 
+                (Convert.ToString(ss.Note[0].CategoryNotes)) + "\n" +
+                (Convert.ToString(ss.Note[0].NoteText)) + "\n" +
+                (Convert.ToString(ss.Note[0].TimeOfCreation)) + "\n" +
+                (Convert.ToString(ss.Note[0].LastChangeTime)));
         }
     }
 }
