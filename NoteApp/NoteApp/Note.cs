@@ -131,7 +131,6 @@ namespace NoteApp
         public Note()
         {
             _timeOfCreation = DateTime.Now;
-            _lastChangeTime = DateTime.Now;
         }
 
         /// <summary>

@@ -86,5 +86,38 @@ namespace NoteAppUI
         {
             _projectManager.SaveToFile(noteList);
         }
+
+        private void EditNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddAndEditNoteForm EditForm = new AddAndEditNoteForm();
+            int EditInd = NoteList.SelectedIndices[0];
+            EditForm.NoteView(_noteList.Note[EditInd]);
+            if (EditForm.ShowDialog() == DialogResult.OK)
+            {
+                _noteList.Note.RemoveAt(EditInd);
+                NoteList.Items[EditInd].Remove();
+                _noteList.Note.Insert(EditInd, EditForm._noteContainer);
+                FillListView(_noteList.Note);
+                SaveToFile(_noteList);
+            }
+        }
+
+        private void RemoveNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int RemInd = NoteList.SelectedIndices[0];
+            _noteList.Note.RemoveAt(RemInd);
+            NoteList.Items[RemInd].Remove();
+            SaveToFile(_noteList);
+        }
+
+        private void EditNoteButton_Click(object sender, EventArgs e)
+        {
+            EditNoteToolStripMenuItem_Click(sender, e);
+        }
+
+        private void RemoveNoteButton_Click(object sender, EventArgs e)
+        {
+            RemoveNoteToolStripMenuItem_Click(sender, e);
+        }
     }
 }

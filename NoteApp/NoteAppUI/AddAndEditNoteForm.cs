@@ -42,5 +42,12 @@ namespace NoteAppUI
         {
             this.Close();
         }
+        public void NoteView(Note NoteEdit)
+        {
+            TitleTextBox.Text = NoteEdit.Name;
+            CategoryComboBox.Text = NoteEdit.CategoryNotes.ToString();
+            ContentTextBox.Text = NoteEdit.NoteText;
+            ModifiedDatePicker.Value = DateTime.Now;
+        }
     }
 }
