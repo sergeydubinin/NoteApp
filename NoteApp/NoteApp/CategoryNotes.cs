@@ -15,7 +15,7 @@ namespace NoteApp
         /// <summary>
         /// Работа
         /// </summary>
-        Work,
+        Work = 1,
 
         /// <summary>
         /// Дом

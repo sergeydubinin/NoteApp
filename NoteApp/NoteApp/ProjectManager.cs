@@ -12,7 +12,7 @@ namespace NoteApp
     /// Класс, реализующий сохранение объекта "Проект" в файл
     /// и загрузку проекта из файла
     /// </summary>
-    public static class ProjectManager
+    public class ProjectManager
     {
         /// <summary>
         /// Имя файла
@@ -33,7 +33,7 @@ namespace NoteApp
         /// Метод для сохранения объекта "Проект" в файл
         /// </summary>
         /// <param name="data">Данные для сохранения</param>
-        public static void SaveToFile(Project data)
+        public void SaveToFile(Project data)
         {
             //Создаём экземпляр сериализатора
             JsonSerializer serializer = new JsonSerializer();

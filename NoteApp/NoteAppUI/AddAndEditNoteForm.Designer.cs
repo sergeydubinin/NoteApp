@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TitleTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.CategoryComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.ModifiedLabel = new System.Windows.Forms.Label();
             this.ContentTextBox = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.OkButton = new System.Windows.Forms.Button();
+            this.CancelButton = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.ModifiedDatePicker = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // label1
@@ -50,12 +50,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Title:";
             // 
-            // textBox1
+            // TitleTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(87, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(968, 22);
-            this.textBox1.TabIndex = 1;
+            this.TitleTextBox.Location = new System.Drawing.Point(87, 6);
+            this.TitleTextBox.Name = "TitleTextBox";
+            this.TitleTextBox.Size = new System.Drawing.Size(968, 22);
+            this.TitleTextBox.TabIndex = 1;
             // 
             // label2
             // 
@@ -66,13 +66,13 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Category:";
             // 
-            // comboBox1
+            // CategoryComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(87, 38);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(167, 24);
-            this.comboBox1.TabIndex = 3;
+            this.CategoryComboBox.FormattingEnabled = true;
+            this.CategoryComboBox.Location = new System.Drawing.Point(87, 38);
+            this.CategoryComboBox.Name = "CategoryComboBox";
+            this.CategoryComboBox.Size = new System.Drawing.Size(167, 24);
+            this.CategoryComboBox.TabIndex = 3;
             // 
             // label3
             // 
@@ -83,28 +83,14 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Created:";
             // 
-            // dateTimePicker1
+            // ModifiedLabel
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(87, 73);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(167, 22);
-            this.dateTimePicker1.TabIndex = 5;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(282, 78);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 17);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Modified:";
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(365, 73);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(167, 22);
-            this.dateTimePicker2.TabIndex = 7;
+            this.ModifiedLabel.AutoSize = true;
+            this.ModifiedLabel.Location = new System.Drawing.Point(282, 78);
+            this.ModifiedLabel.Name = "ModifiedLabel";
+            this.ModifiedLabel.Size = new System.Drawing.Size(65, 17);
+            this.ModifiedLabel.TabIndex = 6;
+            this.ModifiedLabel.Text = "Modified:";
             // 
             // ContentTextBox
             // 
@@ -115,39 +101,55 @@
             this.ContentTextBox.Size = new System.Drawing.Size(1039, 518);
             this.ContentTextBox.TabIndex = 9;
             // 
-            // button1
+            // OkButton
             // 
-            this.button1.Location = new System.Drawing.Point(825, 641);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 32);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "OK";
-            this.button1.UseVisualStyleBackColor = true;
+            this.OkButton.Location = new System.Drawing.Point(825, 641);
+            this.OkButton.Name = "OkButton";
+            this.OkButton.Size = new System.Drawing.Size(93, 32);
+            this.OkButton.TabIndex = 10;
+            this.OkButton.Text = "OK";
+            this.OkButton.UseVisualStyleBackColor = true;
+            this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
-            // button2
+            // CancelButton
             // 
-            this.button2.Location = new System.Drawing.Point(961, 641);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(93, 32);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
+            this.CancelButton.Location = new System.Drawing.Point(961, 641);
+            this.CancelButton.Name = "CancelButton";
+            this.CancelButton.Size = new System.Drawing.Size(93, 32);
+            this.CancelButton.TabIndex = 11;
+            this.CancelButton.Text = "Cancel";
+            this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(87, 73);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(167, 22);
+            this.dateTimePicker1.TabIndex = 12;
+            // 
+            // ModifiedDatePicker
+            // 
+            this.ModifiedDatePicker.Location = new System.Drawing.Point(353, 73);
+            this.ModifiedDatePicker.Name = "ModifiedDatePicker";
+            this.ModifiedDatePicker.Size = new System.Drawing.Size(167, 22);
+            this.ModifiedDatePicker.TabIndex = 13;
             // 
             // AddAndEditNoteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 682);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.ContentTextBox);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.ModifiedDatePicker);
             this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.CancelButton);
+            this.Controls.Add(this.OkButton);
+            this.Controls.Add(this.ContentTextBox);
+            this.Controls.Add(this.ModifiedLabel);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.CategoryComboBox);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TitleTextBox);
             this.Controls.Add(this.label1);
             this.Name = "AddAndEditNoteForm";
             this.Text = "Add/Edit Note";
@@ -159,15 +161,15 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TitleTextBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox CategoryComboBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.Label ModifiedLabel;
         private System.Windows.Forms.TextBox ContentTextBox;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button OkButton;
+        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker ModifiedDatePicker;
     }
 }
