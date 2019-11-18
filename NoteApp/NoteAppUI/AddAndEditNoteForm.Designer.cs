@@ -37,7 +37,7 @@
             this.ContentTextBox = new System.Windows.Forms.TextBox();
             this.OkButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.CreatedTimePicker = new System.Windows.Forms.DateTimePicker();
             this.ModifiedDatePicker = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
@@ -68,6 +68,7 @@
             // 
             // CategoryComboBox
             // 
+            this.CategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CategoryComboBox.FormattingEnabled = true;
             this.CategoryComboBox.Location = new System.Drawing.Point(87, 38);
             this.CategoryComboBox.Name = "CategoryComboBox";
@@ -121,15 +122,19 @@
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(87, 73);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(167, 22);
-            this.dateTimePicker1.TabIndex = 12;
+            // CreatedTimePicker
+            //
+            this.CreatedTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.CreatedTimePicker.Enabled = false;
+            this.CreatedTimePicker.Location = new System.Drawing.Point(87, 73);
+            this.CreatedTimePicker.Name = "CreatedTimePicker";
+            this.CreatedTimePicker.Size = new System.Drawing.Size(167, 22);
+            this.CreatedTimePicker.TabIndex = 12;
             // 
             // ModifiedDatePicker
-            // 
+            //
+            this.ModifiedDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.ModifiedDatePicker.Enabled = false;
             this.ModifiedDatePicker.Location = new System.Drawing.Point(353, 73);
             this.ModifiedDatePicker.Name = "ModifiedDatePicker";
             this.ModifiedDatePicker.Size = new System.Drawing.Size(167, 22);
@@ -141,7 +146,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 682);
             this.Controls.Add(this.ModifiedDatePicker);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.CreatedTimePicker);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.OkButton);
             this.Controls.Add(this.ContentTextBox);
@@ -169,7 +174,7 @@
         private System.Windows.Forms.TextBox ContentTextBox;
         private System.Windows.Forms.Button OkButton;
         private System.Windows.Forms.Button CancelButton;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker CreatedTimePicker;
         private System.Windows.Forms.DateTimePicker ModifiedDatePicker;
     }
 }

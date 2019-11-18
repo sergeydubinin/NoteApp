@@ -13,22 +13,22 @@ namespace NoteAppUI
 {
     public partial class MainForm : Form
     {
-        private Project _noteList = new Project();
-        ProjectManager _projectManager = new ProjectManager();
-        Note _note = new Note();
+        private Project noteList = new Project();
+        ProjectManager projectManager = new ProjectManager();
 
         public MainForm()
         {
             InitializeComponent();
+            NoteApp_Load();
         }
 
         /// <summary>
-        /// Заполнить список контактов. Если в списке уже есть данные (список ранее был заполнен),
-        /// то список будет очищен и снова заполнен.
+        /// Заполнение списка заметок
         /// </summary>
-        /// <param name="_note">Список контактов</param>
+        /// <param name="_note">Список заметок</param>
         public void FillListView(List<Note> _note)
         {
+            //Если в списке уже есть данные, то список будет очищен и снова заполнен
             if (NoteList.Items.Count > 0) NoteList.Items.Clear();
             foreach (Note note in _note)
             {
@@ -37,87 +37,144 @@ namespace NoteAppUI
         }
 
         /// <summary>
-        /// Добавить нового контакта
+        /// Добавление новой заметки в ListView
         /// </summary>
-        /// <param name="Note">Контакт</param>
         public void AddNewNote(Note note)
         {
             int index = NoteList.Items.Add(note.Name).Index;
-            NoteList.Items[index].Tag = note; //свойство Tag теперь ссылается на клиента, пригодится при удалении из списка и редактировании
+            NoteList.Items[index].Tag = note; //свойство Tag теперь ссылается на заметку, пригодится при удалении из списка и редактировании
         }
 
+        /// <summary>
+        /// Отображение выбранной заметки
+        /// </summary>
         private void NoteList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (NoteList.SelectedItems.Count != 0)
             {
-                CategoryLabel.Text = _noteList.Note[NoteList.SelectedIndices[0]].CategoryNotes.ToString();
-                TextBox.Text = _noteList.Note[NoteList.SelectedIndices[0]].NoteText;
-                CreateTimePicker.Value = _noteList.Note[NoteList.SelectedIndices[0]].TimeOfCreation;
-                ChangeTimePicker.Value = _noteList.Note[NoteList.SelectedIndices[0]].LastChangeTime;
+                NameLabel.Text = noteList.Note[NoteList.SelectedIndices[0]].Name;
+                CategoryLabel.Text = noteList.Note[NoteList.SelectedIndices[0]].CategoryNotes.ToString();
+                TextBox.Text = noteList.Note[NoteList.SelectedIndices[0]].NoteText;
+                CreateTimePicker.Value = noteList.Note[NoteList.SelectedIndices[0]].TimeOfCreation;
+                ChangeTimePicker.Value = noteList.Note[NoteList.SelectedIndices[0]].LastChangeTime;
             }
             else
             {
+                NameLabel.Text = string.Empty;
                 CategoryLabel.Text = string.Empty;
                 TextBox.Text = string.Empty;
-                CreateTimePicker.Value = new DateTime(2000, 01, 01);
-                ChangeTimePicker.Value = new DateTime(2000, 01, 01);
             }
 
         }
 
+        /// <summary>
+        /// Добавление заметки (через меню)
+        /// </summary>
         private void AddNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddAndEditNoteForm AddNote = new AddAndEditNoteForm();
             if (AddNote.ShowDialog() == DialogResult.OK)
             {
-                _noteList.Note.Add(AddNote._noteContainer);
-                FillListView(_noteList.Note);
-                SaveToFile(_noteList);
+                noteList.Note.Add(AddNote.CurrentNote);
+                FillListView(noteList.Note);
+                SaveToFile(noteList);
 
             }
         }
 
+        /// <summary>
+        /// Добавление заметки (с помощью кнопки)
+        /// </summary>
         private void AddNoteButton_Click(object sender, EventArgs e)
         {
             AddNoteToolStripMenuItem_Click(sender, e);
         }
 
+        /// <summary>
+        /// Сохранение заметок в файл
+        /// </summary>
+        /// <param name="noteList"></param>
         private void SaveToFile(Project noteList)
         {
-            _projectManager.SaveToFile(noteList);
+            projectManager.SaveToFile(noteList);
         }
 
+        /// <summary>
+        /// Редактирование заметки (через меню)
+        /// </summary>
         private void EditNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddAndEditNoteForm EditForm = new AddAndEditNoteForm();
-            int EditInd = NoteList.SelectedIndices[0];
-            EditForm.NoteView(_noteList.Note[EditInd]);
-            if (EditForm.ShowDialog() == DialogResult.OK)
+            if (NoteList.SelectedIndices.Count != 0)
             {
-                _noteList.Note.RemoveAt(EditInd);
-                NoteList.Items[EditInd].Remove();
-                _noteList.Note.Insert(EditInd, EditForm._noteContainer);
-                FillListView(_noteList.Note);
-                SaveToFile(_noteList);
+                AddAndEditNoteForm EditForm = new AddAndEditNoteForm();
+                int EditInd = NoteList.SelectedIndices[0];
+                EditForm.NoteView(noteList.Note[EditInd]);
+                if (EditForm.ShowDialog() == DialogResult.OK)
+                {
+                    noteList.Note.RemoveAt(EditInd);
+                    NoteList.Items[EditInd].Remove();
+                    noteList.Note.Insert(EditInd, EditForm.CurrentNote);
+                    SaveToFile(noteList);
+                    FillListView(noteList.Note);
+                }
             }
         }
 
+        /// <summary>
+        /// Удаление заметки (через меню)
+        /// </summary>
         private void RemoveNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int RemInd = NoteList.SelectedIndices[0];
-            _noteList.Note.RemoveAt(RemInd);
-            NoteList.Items[RemInd].Remove();
-            SaveToFile(_noteList);
+            if (NoteList.SelectedIndices.Count != 0)
+            {
+                int RemInd = NoteList.SelectedIndices[0];
+                noteList.Note.RemoveAt(RemInd);
+                NoteList.Items[RemInd].Remove();
+                SaveToFile(noteList);
+            }
         }
 
+        /// <summary>
+        /// Редактирование заметки (с помощью кнопки)
+        /// </summary>
         private void EditNoteButton_Click(object sender, EventArgs e)
         {
             EditNoteToolStripMenuItem_Click(sender, e);
         }
 
+        /// <summary>
+        /// Удаление заметки (с помощью кнопки)
+        /// </summary>
         private void RemoveNoteButton_Click(object sender, EventArgs e)
         {
             RemoveNoteToolStripMenuItem_Click(sender, e);
+        }
+
+        /// <summary>
+        /// Выгрузка заметок из файла
+        /// </summary>
+        private void NoteApp_Load()
+        {
+            noteList = ProjectManager.LoadFromFile();
+            FillListView(noteList.Note);
+        }
+
+        /// <summary>
+        /// Вызов окна About
+        /// </summary>
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form About = new AboutForm();
+            About.ShowDialog();
+        }
+
+        /// <summary>
+        /// Закрытие главного окна
+        /// </summary>
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveToFile(noteList);
+            this.Close();
         }
     }
 }

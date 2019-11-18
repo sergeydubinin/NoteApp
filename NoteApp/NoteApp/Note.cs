@@ -31,7 +31,7 @@ namespace NoteApp
         /// <summary>
         /// Время создания заметки
         /// </summary>
-        private readonly DateTime _timeOfCreation;
+        private DateTime _timeOfCreation;
 
         /// <summary>
         /// Время последнего изменения заметки
@@ -106,6 +106,11 @@ namespace NoteApp
             {
                 return _timeOfCreation;
             }
+
+            set
+            {
+                _timeOfCreation = value;
+            }
         }
 
         /// <summary>
@@ -121,7 +126,7 @@ namespace NoteApp
 
             set
             {
-                _lastChangeTime = DateTime.Now;
+                _lastChangeTime = value;
             }
         }
 

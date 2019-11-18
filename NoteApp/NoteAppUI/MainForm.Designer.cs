@@ -44,6 +44,7 @@
             this.AddNoteButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.NameLabel = new System.Windows.Forms.Label();
             this.ChangeTimePicker = new System.Windows.Forms.DateTimePicker();
             this.CreateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.TextBox = new System.Windows.Forms.TextBox();
@@ -82,8 +83,9 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -129,6 +131,7 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(133, 26);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -147,6 +150,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.NameLabel);
             this.splitContainer1.Panel2.Controls.Add(this.ChangeTimePicker);
             this.splitContainer1.Panel2.Controls.Add(this.CreateTimePicker);
             this.splitContainer1.Panel2.Controls.Add(this.TextBox);
@@ -221,16 +225,29 @@
             this.comboBox1.Size = new System.Drawing.Size(177, 24);
             this.comboBox1.TabIndex = 0;
             // 
-            // ChangeTimePicker
+            // NameLabel
             // 
-            this.ChangeTimePicker.Location = new System.Drawing.Point(345, 47);
+            this.NameLabel.AutoSize = true;
+            this.NameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.NameLabel.Location = new System.Drawing.Point(13, 7);
+            this.NameLabel.Name = "NameLabel";
+            this.NameLabel.Size = new System.Drawing.Size(0, 29);
+            this.NameLabel.TabIndex = 10;
+            // 
+            // ChangeTimePicker
+            //
+            this.ChangeTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.ChangeTimePicker.Enabled = false;
+            this.ChangeTimePicker.Location = new System.Drawing.Point(345, 84);
             this.ChangeTimePicker.Name = "ChangeTimePicker";
             this.ChangeTimePicker.Size = new System.Drawing.Size(167, 22);
             this.ChangeTimePicker.TabIndex = 9;
             // 
             // CreateTimePicker
-            // 
-            this.CreateTimePicker.Location = new System.Drawing.Point(83, 47);
+            //
+            this.CreateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.CreateTimePicker.Enabled = false;
+            this.CreateTimePicker.Location = new System.Drawing.Point(83, 84);
             this.CreateTimePicker.Name = "CreateTimePicker";
             this.CreateTimePicker.Size = new System.Drawing.Size(167, 22);
             this.CreateTimePicker.TabIndex = 8;
@@ -242,17 +259,18 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TextBox.BackColor = System.Drawing.SystemColors.Control;
             this.TextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
-            this.TextBox.Location = new System.Drawing.Point(18, 88);
+            this.TextBox.Location = new System.Drawing.Point(18, 117);
             this.TextBox.Margin = new System.Windows.Forms.Padding(4);
             this.TextBox.Multiline = true;
             this.TextBox.Name = "TextBox";
-            this.TextBox.Size = new System.Drawing.Size(562, 538);
+            this.TextBox.ReadOnly = true;
+            this.TextBox.Size = new System.Drawing.Size(562, 509);
             this.TextBox.TabIndex = 7;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(274, 52);
+            this.label5.Location = new System.Drawing.Point(274, 89);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 17);
             this.label5.TabIndex = 4;
@@ -261,7 +279,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 52);
+            this.label4.Location = new System.Drawing.Point(15, 89);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 17);
             this.label4.TabIndex = 2;
@@ -270,16 +288,15 @@
             // CategoryLabel
             // 
             this.CategoryLabel.AutoSize = true;
-            this.CategoryLabel.Location = new System.Drawing.Point(90, 15);
+            this.CategoryLabel.Location = new System.Drawing.Point(90, 52);
             this.CategoryLabel.Name = "CategoryLabel";
-            this.CategoryLabel.Size = new System.Drawing.Size(63, 17);
+            this.CategoryLabel.Size = new System.Drawing.Size(0, 17);
             this.CategoryLabel.TabIndex = 1;
-            this.CategoryLabel.Text = "category";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 15);
+            this.label2.Location = new System.Drawing.Point(15, 52);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 17);
             this.label2.TabIndex = 0;
@@ -333,6 +350,7 @@
         private System.Windows.Forms.ListView NoteList;
         private System.Windows.Forms.DateTimePicker ChangeTimePicker;
         private System.Windows.Forms.DateTimePicker CreateTimePicker;
+        private System.Windows.Forms.Label NameLabel;
     }
 }
 
