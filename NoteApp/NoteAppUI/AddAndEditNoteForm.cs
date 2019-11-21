@@ -35,11 +35,15 @@ namespace NoteAppUI
 
             set
             {
-                TitleTextBox.Text = value.Name;
-                CategoryComboBox.Text = value.CategoryNotes.ToString();
-                ContentTextBox.Text = value.NoteText;
-                CreatedTimePicker.Value = value.TimeOfCreation;
-                ModifiedDatePicker.Value = value.LastChangeTime;
+                _currentNote = value;
+                if (value != null)
+                {
+                    TitleTextBox.Text = value.Name;
+                    CategoryComboBox.Text = value.CategoryNotes.ToString();
+                    ContentTextBox.Text = value.NoteText;
+                    CreatedTimePicker.Value = value.TimeOfCreation;
+                    ModifiedDatePicker.Value = DateTime.Now;
+                }
             }
         }
 
@@ -88,17 +92,16 @@ namespace NoteAppUI
             this.Close();
         }
 
-        /// <summary>
-        /// Просмотр заметки
-        /// </summary>
-        /// <param name="NoteEdit"></param>
-        public void NoteView(Note NoteEdit)
+        private void TitleTextBox_TextChanged(object sender, EventArgs e)
         {
-            TitleTextBox.Text = NoteEdit.Name;
-            CategoryComboBox.Text = NoteEdit.CategoryNotes.ToString();
-            ContentTextBox.Text = NoteEdit.NoteText;
-            CreatedTimePicker.Value = NoteEdit.TimeOfCreation;
-            ModifiedDatePicker.Value = DateTime.Now;
+            if (TitleTextBox.Text.Length > 50 | string.IsNullOrWhiteSpace(TitleTextBox.Text))
+            {
+                TitleTextBox.BackColor = Color.LightSalmon;
+            }
+            else
+            {
+                TitleTextBox.BackColor = Color.White;
+            }
         }
     }
 }

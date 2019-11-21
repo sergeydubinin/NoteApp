@@ -37,12 +37,12 @@ namespace NoteAppUI
         }
 
         /// <summary>
-        /// Добавление новой заметки в ListView
+        /// Добавление заметки в ListView
         /// </summary>
         public void AddNewNote(Note note)
         {
             int index = NoteList.Items.Add(note.Name).Index;
-            NoteList.Items[index].Tag = note; //свойство Tag теперь ссылается на заметку, пригодится при удалении из списка и редактировании
+            NoteList.Items[index].Tag = note;
         }
 
         /// <summary>
@@ -63,6 +63,8 @@ namespace NoteAppUI
                 NameLabel.Text = string.Empty;
                 CategoryLabel.Text = string.Empty;
                 TextBox.Text = string.Empty;
+                CreateTimePicker.Value = DateTime.Now;
+                ChangeTimePicker.Value = DateTime.Now;
             }
 
         }
@@ -73,12 +75,12 @@ namespace NoteAppUI
         private void AddNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddAndEditNoteForm AddNote = new AddAndEditNoteForm();
+            AddNote.CurrentNote = new Note();
             if (AddNote.ShowDialog() == DialogResult.OK)
             {
                 noteList.Note.Add(AddNote.CurrentNote);
                 FillListView(noteList.Note);
                 SaveToFile(noteList);
-
             }
         }
 
@@ -108,7 +110,8 @@ namespace NoteAppUI
             {
                 AddAndEditNoteForm EditForm = new AddAndEditNoteForm();
                 int EditInd = NoteList.SelectedIndices[0];
-                EditForm.NoteView(noteList.Note[EditInd]);
+                var note = noteList.Note[EditInd];
+                EditForm.CurrentNote = note;
                 if (EditForm.ShowDialog() == DialogResult.OK)
                 {
                     noteList.Note.RemoveAt(EditInd);
@@ -175,6 +178,11 @@ namespace NoteAppUI
         {
             SaveToFile(noteList);
             this.Close();
+        }
+
+        private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

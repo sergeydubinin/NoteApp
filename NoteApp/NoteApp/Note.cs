@@ -51,7 +51,7 @@ namespace NoteApp
             set
             {
                 const int maxNumberSymbols = 50;
-                if (_name.Length > maxNumberSymbols)
+                if (value.Length > maxNumberSymbols)
                 {
                     throw new ArgumentException("Название заметки должно быть не более 50 символов");
                 }

@@ -52,10 +52,14 @@
             // 
             // TitleTextBox
             // 
+            this.TitleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TitleTextBox.Location = new System.Drawing.Point(87, 6);
             this.TitleTextBox.Name = "TitleTextBox";
             this.TitleTextBox.Size = new System.Drawing.Size(968, 22);
             this.TitleTextBox.TabIndex = 1;
+            this.TitleTextBox.TextChanged += new System.EventHandler(this.TitleTextBox_TextChanged);
             // 
             // label2
             // 
@@ -95,6 +99,9 @@
             // 
             // ContentTextBox
             // 
+            this.ContentTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ContentTextBox.Location = new System.Drawing.Point(15, 116);
             this.ContentTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ContentTextBox.Multiline = true;
@@ -104,6 +111,7 @@
             // 
             // OkButton
             // 
+            this.OkButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.OkButton.Location = new System.Drawing.Point(825, 641);
             this.OkButton.Name = "OkButton";
             this.OkButton.Size = new System.Drawing.Size(93, 32);
@@ -114,6 +122,7 @@
             // 
             // CancelButton
             // 
+            this.CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CancelButton.Location = new System.Drawing.Point(961, 641);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(93, 32);
@@ -123,8 +132,7 @@
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // CreatedTimePicker
-            //
-            this.CreatedTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            // 
             this.CreatedTimePicker.Enabled = false;
             this.CreatedTimePicker.Location = new System.Drawing.Point(87, 73);
             this.CreatedTimePicker.Name = "CreatedTimePicker";
@@ -132,8 +140,7 @@
             this.CreatedTimePicker.TabIndex = 12;
             // 
             // ModifiedDatePicker
-            //
-            this.ModifiedDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            // 
             this.ModifiedDatePicker.Enabled = false;
             this.ModifiedDatePicker.Location = new System.Drawing.Point(353, 73);
             this.ModifiedDatePicker.Name = "ModifiedDatePicker";
