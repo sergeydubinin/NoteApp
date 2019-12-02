@@ -76,7 +76,7 @@ namespace NoteAppUI
             {
                 noteList.Note.Add(AddNote.CurrentNote);
                 FillListView(noteList);
-                ProjectManager.SaveToFile(noteList);
+                ProjectSave();
             }
         }
 
@@ -112,7 +112,7 @@ namespace NoteAppUI
                     noteList.Note.RemoveAt(EditInd);
                     NoteList.Items[EditInd].Remove();
                     noteList.Note.Insert(EditInd, EditForm.CurrentNote);
-                    ProjectManager.SaveToFile(noteList);
+                    ProjectSave();
                     FillListView(noteList);
                 }
             }
@@ -144,7 +144,7 @@ namespace NoteAppUI
                 int RemInd = NoteList.SelectedIndices[0];
                 noteList.Note.RemoveAt(RemInd);
                 NoteList.Items[RemInd].Remove();
-                ProjectManager.SaveToFile(noteList);
+                ProjectSave();
             }
         }
         /// <summary>
@@ -168,7 +168,10 @@ namespace NoteAppUI
         /// </summary>
         private void NoteApp_Load()
         {
-            noteList = ProjectManager.LoadFromFile();
+            const string name = @"\NoteApp.notes";
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string file = path + name;
+            noteList = ProjectManager.LoadFromFile(file);
             FillListView(noteList);
         }
 
@@ -186,7 +189,7 @@ namespace NoteAppUI
         /// </summary>
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProjectManager.SaveToFile(noteList);
+            ProjectSave();
             this.Close();
         }
 
@@ -195,7 +198,18 @@ namespace NoteAppUI
         /// </summary>
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            ProjectManager.SaveToFile(noteList);
+            ProjectSave();
+        }
+
+        /// <summary>
+        /// Метод сохранения заметок в файл
+        /// </summary>
+        private void ProjectSave()
+        {
+            const string name = @"\NoteApp.notes";
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string file = path + name;
+            ProjectManager.SaveToFile(noteList, file);
         }
     }
 }

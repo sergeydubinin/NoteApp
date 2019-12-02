@@ -55,17 +55,6 @@ namespace NoteApp.UnitTests
             Assert.AreEqual(expected, actual, "Геттер CategoryNotes возвращает неправильную категорию заметки");
         }
 
-        [Test(Description = "Позитивный тест сеттера CategoryNotes")]
-        public void TestCategoryNotesSet_CorrectValue()
-        {
-            var note = new Note();
-
-            Assert.DoesNotThrow(
-            () => { note.CategoryNotes = CategoryNotes.Work; },
-            "Не должно возникать исключения"
-            );
-        }
-
         [Test(Description = "Позитивный тест геттера NoteText")]
         public void TestNoteTextGet_CorrectValue()
         {
@@ -75,29 +64,6 @@ namespace NoteApp.UnitTests
             var actual = note.NoteText;
 
             Assert.AreEqual(expected, actual, "Геттер NoteText возвращает неправильный текст заметки");
-        }
-
-        [Test(Description = "Позитивный тест сеттера NoteText")]
-        public void TestNoteTextSet_CorrectValue()
-        {
-            var text = "Текст заметки";
-            var note = new Note();
-
-            Assert.DoesNotThrow(
-            () => { note.NoteText = text; },
-            "Не должно возникать исключения"
-            );
-        }
-
-        [TestCase("", "Должно возникать исключение, если содержимое текста заметки пусто",
-           TestName = "Негативный тест сеттера NoteText")]
-        public void TestNoteText_ArgumentExeption(string wrongTitle, string message)
-        {
-            var note = new Note();
-
-            Assert.Throws<ArgumentException>(
-            () => { note.NoteText = wrongTitle; },
-            message);
         }
 
         [Test(Description = "Позитивный тест геттера TimeOfCreation")]

@@ -96,15 +96,8 @@ namespace NoteApp
 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("Текст заметки является пустым!");
-                }
-                else
-                {
                     _noteText = value;
                     _lastChangeTime = DateTime.Now;
-                }
             }
         }
 

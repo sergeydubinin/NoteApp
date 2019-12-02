@@ -15,31 +15,16 @@ namespace NoteApp
     public class ProjectManager
     {
         /// <summary>
-        /// Имя файла
-        /// </summary>
-        private const string _name = @"\NoteApp.notes";
-
-        /// <summary>
-        /// Путь к папке документов
-        /// </summary>
-        private static readonly string _path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-
-        /// <summary>
-        /// Полный путь файла
-        /// </summary>
-        private static readonly string _file = _path + _name;
-
-        /// <summary>
         /// Метод для сохранения объекта "Проект" в файл
         /// </summary>
         /// <param name="data">Данные для сохранения</param>
-        public static void SaveToFile(Project data)
+        public static void SaveToFile(Project data, string path)
         {
             //Создаём экземпляр сериализатора
             JsonSerializer serializer = new JsonSerializer();
 
             //Открываем поток для записи в файл с указанием пути
-            using (StreamWriter sw = new StreamWriter(_file))
+            using (StreamWriter sw = new StreamWriter(path))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 //Вызываем сериализацию и передаем объект, который хотим сериализовать
@@ -51,7 +36,7 @@ namespace NoteApp
         /// Метод загрузки проекта из файла
         /// </summary>
         /// <returns>Возвращает данные из файла</returns>
-        public static Project LoadFromFile()
+        public static Project LoadFromFile(string path)
         {
             //Создаём переменную, в которую поместим результат десериализации
             Project project = null;
@@ -60,7 +45,7 @@ namespace NoteApp
             JsonSerializer serializer = new JsonSerializer();
 
             //Открываем поток для чтения из файла с указанием пути
-            using (var sr = new StreamReader(_file))
+            using (var sr = new StreamReader(path))
             using (JsonReader reader = new JsonTextReader(sr))
             {
                 //Вызываем десериализацию и явно преобразуем результат в целевой тип данных

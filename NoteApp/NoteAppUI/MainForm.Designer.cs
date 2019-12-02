@@ -69,7 +69,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(934, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(934, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -78,7 +78,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // exitToolStripMenuItem
@@ -95,7 +95,7 @@
             this.editNoteToolStripMenuItem,
             this.removeNoteToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 26);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // addNoteToolStripMenuItem
@@ -124,7 +124,7 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 26);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // aboutToolStripMenuItem
@@ -137,7 +137,7 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 30);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 28);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -160,21 +160,22 @@
             this.splitContainer1.Panel2.Controls.Add(this.label4);
             this.splitContainer1.Panel2.Controls.Add(this.CategoryLabel);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
-            this.splitContainer1.Size = new System.Drawing.Size(934, 637);
+            this.splitContainer1.Size = new System.Drawing.Size(934, 639);
             this.splitContainer1.SplitterDistance = 322;
             this.splitContainer1.TabIndex = 1;
             // 
             // NoteList
             // 
-            this.NoteList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.NoteList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.NoteList.View = System.Windows.Forms.View.Details;
             this.NoteList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.NoteList.Columns.Add("NoteList", 222);
             this.NoteList.HideSelection = false;
             this.NoteList.Location = new System.Drawing.Point(12, 52);
             this.NoteList.Name = "NoteList";
-            this.NoteList.Size = new System.Drawing.Size(300, 530);
+            this.NoteList.Size = new System.Drawing.Size(307, 530);
             this.NoteList.TabIndex = 8;
             this.NoteList.UseCompatibleStateImageBehavior = false;
             this.NoteList.View = System.Windows.Forms.View.Details;
@@ -186,7 +187,7 @@
             this.removeNoteButton.FlatAppearance.BorderSize = 0;
             this.removeNoteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.removeNoteButton.Image = global::NoteAppUI.Properties.Resources.document_delete;
-            this.removeNoteButton.Location = new System.Drawing.Point(84, 593);
+            this.removeNoteButton.Location = new System.Drawing.Point(84, 595);
             this.removeNoteButton.Name = "removeNoteButton";
             this.removeNoteButton.Size = new System.Drawing.Size(30, 30);
             this.removeNoteButton.TabIndex = 10;
@@ -199,7 +200,7 @@
             this.editNoteButton.FlatAppearance.BorderSize = 0;
             this.editNoteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editNoteButton.Image = global::NoteAppUI.Properties.Resources.document_edit__1_;
-            this.editNoteButton.Location = new System.Drawing.Point(48, 593);
+            this.editNoteButton.Location = new System.Drawing.Point(48, 595);
             this.editNoteButton.Name = "editNoteButton";
             this.editNoteButton.Size = new System.Drawing.Size(30, 30);
             this.editNoteButton.TabIndex = 9;
@@ -212,7 +213,7 @@
             this.AddNoteButton.FlatAppearance.BorderSize = 0;
             this.AddNoteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddNoteButton.Image = global::NoteAppUI.Properties.Resources.document_add;
-            this.AddNoteButton.Location = new System.Drawing.Point(12, 593);
+            this.AddNoteButton.Location = new System.Drawing.Point(12, 595);
             this.AddNoteButton.Name = "AddNoteButton";
             this.AddNoteButton.Size = new System.Drawing.Size(30, 30);
             this.AddNoteButton.TabIndex = 8;
@@ -233,7 +234,7 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(135, 12);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(177, 24);
+            this.comboBox1.Size = new System.Drawing.Size(184, 24);
             this.comboBox1.TabIndex = 0;
             // 
             // NameLabel
@@ -272,7 +273,7 @@
             this.TextBox.Multiline = true;
             this.TextBox.Name = "TextBox";
             this.TextBox.ReadOnly = true;
-            this.TextBox.Size = new System.Drawing.Size(591, 508);
+            this.TextBox.Size = new System.Drawing.Size(591, 510);
             this.TextBox.TabIndex = 7;
             // 
             // label5
