@@ -55,6 +55,10 @@ namespace NoteApp
                 {
                     throw new ArgumentException("Название заметки должно быть не более 50 символов");
                 }
+                else if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Название заметки не может быть null!");
+                }
                 else
                 {
                     _name = value;
@@ -92,8 +96,15 @@ namespace NoteApp
 
             set
             {
-                _noteText = value;
-                _lastChangeTime = DateTime.Now;
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Текст заметки является пустым!");
+                }
+                else
+                {
+                    _noteText = value;
+                    _lastChangeTime = DateTime.Now;
+                }
             }
         }
 
@@ -109,7 +120,14 @@ namespace NoteApp
 
             set
             {
-                _timeOfCreation = value;
+                if (value > DateTime.Now)
+                {
+                    throw new ArgumentException("Дата создания не может быть позже текущей даты!");
+                }
+                else
+                {
+                    _timeOfCreation = value;
+                }
             }
         }
 
@@ -126,7 +144,18 @@ namespace NoteApp
 
             set
             {
-                _lastChangeTime = value;
+                if (value > DateTime.Now)
+                {
+                    throw new ArgumentException("Дата последнего изменения не может быть позже текущей даты!");
+                }
+                else if (value < _timeOfCreation)
+                {
+                    throw new ArgumentException("Дата последнего изменения не может быть ранее даты создания!");
+                }
+                else
+                {
+                    _lastChangeTime = value;
+                }
             }
         }
 
@@ -148,7 +177,9 @@ namespace NoteApp
             {
                 Name = Name,
                 CategoryNotes = CategoryNotes,
-                NoteText = NoteText
+                NoteText = NoteText,
+                TimeOfCreation = TimeOfCreation,
+                LastChangeTime = LastChangeTime,
             };
         }
     }

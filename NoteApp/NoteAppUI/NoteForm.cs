@@ -11,7 +11,10 @@ using NoteApp;
 
 namespace NoteAppUI
 {
-    public partial class AddAndEditNoteForm : Form
+    /// <summary>
+    /// Форма добавления и редактирования заметки
+    /// </summary>
+    public partial class NoteForm : Form
     {
         /// <summary>
         /// Текущая заметка
@@ -50,7 +53,7 @@ namespace NoteAppUI
         /// <summary>
         /// Конструктор
         /// </summary>
-        public AddAndEditNoteForm()
+        public NoteForm()
         {
             InitializeComponent();
             FillCategoryItems();
@@ -61,21 +64,17 @@ namespace NoteAppUI
         /// </summary>
         public void FillCategoryItems()
         {
-            CategoryComboBox.Items.Add(CategoryNotes.Work);
-            CategoryComboBox.Items.Add(CategoryNotes.Home);
-            CategoryComboBox.Items.Add(CategoryNotes.HealthAndSport);
-            CategoryComboBox.Items.Add(CategoryNotes.People);
-            CategoryComboBox.Items.Add(CategoryNotes.Documents);
-            CategoryComboBox.Items.Add(CategoryNotes.Finance);
-            CategoryComboBox.Items.Add(CategoryNotes.Different);
+            var values = Enum.GetValues(typeof(CategoryNotes));
+            foreach (var value in values)
+            {
+                CategoryComboBox.Items.Add(value);
+            }
             CategoryComboBox.SelectedIndex = 6;
         }
 
         /// <summary>
         /// Обработчик кнопки Ok
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void OkButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
@@ -85,13 +84,14 @@ namespace NoteAppUI
         /// <summary>
         /// Обработчик кнопки Cancle
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void CancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Проверка на ввод некорректных значений
+        /// </summary>
         private void TitleTextBox_TextChanged(object sender, EventArgs e)
         {
             if (TitleTextBox.Text.Length > 50 | string.IsNullOrWhiteSpace(TitleTextBox.Text))

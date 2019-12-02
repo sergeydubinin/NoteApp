@@ -1,6 +1,6 @@
 ﻿namespace NoteAppUI
 {
-    partial class AddAndEditNoteForm
+    partial class NoteForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NoteForm));
             this.label1 = new System.Windows.Forms.Label();
             this.TitleTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -112,9 +113,9 @@
             // OkButton
             // 
             this.OkButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.OkButton.Location = new System.Drawing.Point(825, 641);
+            this.OkButton.Location = new System.Drawing.Point(848, 640);
             this.OkButton.Name = "OkButton";
-            this.OkButton.Size = new System.Drawing.Size(93, 32);
+            this.OkButton.Size = new System.Drawing.Size(100, 30);
             this.OkButton.TabIndex = 10;
             this.OkButton.Text = "OK";
             this.OkButton.UseVisualStyleBackColor = true;
@@ -123,9 +124,9 @@
             // CancelButton
             // 
             this.CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CancelButton.Location = new System.Drawing.Point(961, 641);
+            this.CancelButton.Location = new System.Drawing.Point(954, 640);
             this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(93, 32);
+            this.CancelButton.Size = new System.Drawing.Size(100, 30);
             this.CancelButton.TabIndex = 11;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
@@ -147,7 +148,7 @@
             this.ModifiedDatePicker.Size = new System.Drawing.Size(167, 22);
             this.ModifiedDatePicker.TabIndex = 13;
             // 
-            // AddAndEditNoteForm
+            // NoteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -163,7 +164,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.TitleTextBox);
             this.Controls.Add(this.label1);
-            this.Name = "AddAndEditNoteForm";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "NoteForm";
             this.Text = "Add/Edit Note";
             this.ResumeLayout(false);
             this.PerformLayout();

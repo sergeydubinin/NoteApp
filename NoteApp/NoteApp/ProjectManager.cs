@@ -33,7 +33,7 @@ namespace NoteApp
         /// Метод для сохранения объекта "Проект" в файл
         /// </summary>
         /// <param name="data">Данные для сохранения</param>
-        public void SaveToFile(Project data)
+        public static void SaveToFile(Project data)
         {
             //Создаём экземпляр сериализатора
             JsonSerializer serializer = new JsonSerializer();
