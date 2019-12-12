@@ -90,7 +90,7 @@ namespace NoteAppUI
         }
 
         /// <summary>
-        /// Проверка на ввод некорректных значений
+        /// Проверка на ввод некорректного названия заметки
         /// </summary>
         private void TitleTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -101,6 +101,28 @@ namespace NoteAppUI
             else
             {
                 TitleTextBox.BackColor = Color.White;
+            }
+        }
+
+        /// <summary>
+        /// Отоброжение всплывающих подсказок при вводе некорректного названия заметки
+        /// </summary>
+        private void TitleTextBox_MouseEnter(object sender, EventArgs e)
+        {
+            if (TitleTextBox.Text.Length > 50)
+            {
+                toolTip.SetToolTip(TitleTextBox, "Название заметки превышает 50 символов");
+                toolTip.IsBalloon = true;
+            }
+            else if (string.IsNullOrWhiteSpace(TitleTextBox.Text))
+            {
+                toolTip.SetToolTip(TitleTextBox, "Не введено название заметки");
+                toolTip.IsBalloon = true;
+            }
+            else
+            {
+                toolTip.RemoveAll();
+                toolTip.IsBalloon = false;
             }
         }
     }

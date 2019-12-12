@@ -27,6 +27,7 @@ namespace NoteAppUI
         {
             InitializeComponent();
             NoteApp_Load();
+            FillCategoryItems();
         }
 
         /// <summary>
@@ -35,7 +36,8 @@ namespace NoteAppUI
         public void FillListView(Project project)
         {
             if (NoteList.Items.Count > 0) NoteList.Items.Clear();
-            foreach (Note note in project.Note)
+            var sortNotes = project.SortNotes();
+            foreach (Note note in sortNotes)
             {
                 NoteList.Items.Add(note.Name);
             }
@@ -210,6 +212,16 @@ namespace NoteAppUI
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string file = path + name;
             ProjectManager.SaveToFile(noteList, file);
+        }
+
+        public void FillCategoryItems()
+        {
+            CategoryComboBox.Items.Add("All");
+            foreach (CategoryNotes element in Enum.GetValues(typeof(CategoryNotes)))
+            {
+                CategoryComboBox.Items.Add(element);
+            }
+            CategoryComboBox.SelectedIndex = 0;
         }
     }
 }

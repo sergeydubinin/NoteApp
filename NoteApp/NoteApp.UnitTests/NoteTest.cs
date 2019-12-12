@@ -155,11 +155,8 @@ namespace NoteApp.UnitTests
             Note clone = (Note)expected.Clone();
             var actual = clone;
 
-            Assert.AreEqual(expected.Name, actual.Name);
-            Assert.AreEqual(expected.CategoryNotes, actual.CategoryNotes);
-            Assert.AreEqual(expected.NoteText, actual.NoteText);
-            Assert.AreEqual(expected.TimeOfCreation, actual.TimeOfCreation);
-            Assert.AreEqual(expected.LastChangeTime, actual.LastChangeTime);
+            Assert.AreEqual(expected, actual);
+
         }
     }
 }

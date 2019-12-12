@@ -175,5 +175,15 @@ namespace NoteApp
                 LastChangeTime = LastChangeTime,
             };
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Note
+                && ((Note)obj).Name == this.Name
+                && ((Note)obj).CategoryNotes == this.CategoryNotes
+                && ((Note)obj).NoteText == this.NoteText
+                && ((Note)obj).TimeOfCreation == this.TimeOfCreation
+                && ((Note)obj).LastChangeTime == this.LastChangeTime;
+        }
     }
 }

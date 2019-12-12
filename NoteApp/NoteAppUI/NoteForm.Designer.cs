@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NoteForm));
             this.label1 = new System.Windows.Forms.Label();
             this.TitleTextBox = new System.Windows.Forms.TextBox();
@@ -40,6 +41,7 @@
             this.CancelButton = new System.Windows.Forms.Button();
             this.CreatedTimePicker = new System.Windows.Forms.DateTimePicker();
             this.ModifiedDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // label1
@@ -61,6 +63,7 @@
             this.TitleTextBox.Size = new System.Drawing.Size(968, 22);
             this.TitleTextBox.TabIndex = 1;
             this.TitleTextBox.TextChanged += new System.EventHandler(this.TitleTextBox_TextChanged);
+            this.TitleTextBox.MouseEnter += new System.EventHandler(this.TitleTextBox_MouseEnter);
             // 
             // label2
             // 
@@ -185,5 +188,6 @@
         private System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.DateTimePicker CreatedTimePicker;
         private System.Windows.Forms.DateTimePicker ModifiedDatePicker;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

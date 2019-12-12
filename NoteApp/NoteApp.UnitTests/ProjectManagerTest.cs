@@ -4,6 +4,7 @@ using NUnit.Framework;
 using NoteApp;
 using System.IO;
 using Newtonsoft.Json;
+using System.Reflection;
 
 namespace NoteApp.UnitTests
 {
@@ -34,10 +35,17 @@ namespace NoteApp.UnitTests
             project.Note.Add(note1);
             project.Note.Add(note2);
 
-            ProjectManager.SaveToFile(project, @"C:\Users\serge\source\repos\NoteApp\NoteApp\NoteApp.UnitTests\expected.json");
+            string name1 = @"\expected.json";
+            string path = Assembly.GetExecutingAssembly().Location;
+            string ppath = Path.GetDirectoryName(path);
+            string file1 = ppath + name1;
+            string name2 = @"\example.json";
+            string file2 = ppath + name2;
 
-            var expected = File.ReadAllText(@"C:\Users\serge\source\repos\NoteApp\NoteApp\NoteApp.UnitTests\expected.json");
-            var actual = File.ReadAllText(@"C:\Users\serge\source\repos\NoteApp\NoteApp\NoteApp.UnitTests\example.json");
+            ProjectManager.SaveToFile(project, file1);
+
+            var expected = File.ReadAllText(file1);
+            var actual = File.ReadAllText(file2);
 
             Assert.AreEqual(actual, expected);
         }
@@ -67,15 +75,17 @@ namespace NoteApp.UnitTests
             project.Note.Add(note2);
             var actual = project.Note;
 
-            var expected = ProjectManager.LoadFromFile(@"C:\Users\serge\source\repos\NoteApp\NoteApp\NoteApp.UnitTests\example.json");
+            string name = @"\example.json";
+            string path = Assembly.GetExecutingAssembly().Location;
+            string ppath = Path.GetDirectoryName(path);
+            string file = ppath + name;
+
+
+            var expected = ProjectManager.LoadFromFile(file);
 
             for (int i = 0; i < actual.Count; i++)
             {
-                Assert.AreEqual(actual[i].Name, expected.Note[i].Name);
-                Assert.AreEqual(actual[i].CategoryNotes, expected.Note[i].CategoryNotes);
-                Assert.AreEqual(actual[i].NoteText, expected.Note[i].NoteText);
-                Assert.AreEqual(actual[i].TimeOfCreation, expected.Note[i].TimeOfCreation);
-                Assert.AreEqual(actual[i].LastChangeTime, expected.Note[i].LastChangeTime);
+                Assert.AreEqual(actual[i], expected.Note[i]);
             }
         }
     }

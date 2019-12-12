@@ -44,7 +44,7 @@
             this.editNoteButton = new System.Windows.Forms.Button();
             this.AddNoteButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.CategoryComboBox = new System.Windows.Forms.ComboBox();
             this.NameLabel = new System.Windows.Forms.Label();
             this.ChangeTimePicker = new System.Windows.Forms.DateTimePicker();
             this.CreateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -147,7 +147,7 @@
             this.splitContainer1.Panel1.Controls.Add(this.editNoteButton);
             this.splitContainer1.Panel1.Controls.Add(this.AddNoteButton);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
-            this.splitContainer1.Panel1.Controls.Add(this.comboBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.CategoryComboBox);
             // 
             // splitContainer1.Panel2
             // 
@@ -229,13 +229,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Show Category:";
             // 
-            // comboBox1
+            // CategoryComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(135, 12);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(184, 24);
-            this.comboBox1.TabIndex = 0;
+            this.CategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CategoryComboBox.FormattingEnabled = true;
+            this.CategoryComboBox.Location = new System.Drawing.Point(135, 12);
+            this.CategoryComboBox.Name = "CategoryComboBox";
+            this.CategoryComboBox.Size = new System.Drawing.Size(184, 24);
+            this.CategoryComboBox.TabIndex = 0;
             // 
             // NameLabel
             // 
@@ -345,7 +346,7 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox CategoryComboBox;
         private System.Windows.Forms.TextBox TextBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
