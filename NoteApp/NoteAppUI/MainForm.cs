@@ -18,7 +18,8 @@ namespace NoteAppUI
         /// <summary>
         /// Создание объекта класса
         /// </summary>
-        private Project noteList = new Project();
+        private Project Notes = new Project();
+        private readonly Project sortNotes = new Project();
 
         /// <summary>
         /// Конструктор
@@ -48,13 +49,14 @@ namespace NoteAppUI
         /// </summary>
         private void NoteList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var displayedNotes = (CategoryComboBox.Text == "All") ? Notes : sortNotes;
             if (NoteList.SelectedItems.Count != 0)
             {
-                NameLabel.Text = noteList.Note[NoteList.SelectedIndices[0]].Name;
-                CategoryLabel.Text = noteList.Note[NoteList.SelectedIndices[0]].CategoryNotes.ToString();
-                TextBox.Text = noteList.Note[NoteList.SelectedIndices[0]].NoteText;
-                CreateTimePicker.Value = noteList.Note[NoteList.SelectedIndices[0]].TimeOfCreation;
-                ChangeTimePicker.Value = noteList.Note[NoteList.SelectedIndices[0]].LastChangeTime;
+                NameLabel.Text = displayedNotes.Note[NoteList.SelectedIndices[0]].Name;
+                CategoryLabel.Text = displayedNotes.Note[NoteList.SelectedIndices[0]].CategoryNotes.ToString();
+                TextBox.Text = displayedNotes.Note[NoteList.SelectedIndices[0]].NoteText;
+                CreateTimePicker.Value = displayedNotes.Note[NoteList.SelectedIndices[0]].TimeOfCreation;
+                ChangeTimePicker.Value = displayedNotes.Note[NoteList.SelectedIndices[0]].LastChangeTime;
             }
             else
             {
@@ -76,8 +78,8 @@ namespace NoteAppUI
             AddNote.CurrentNote = new Note();
             if (AddNote.ShowDialog() == DialogResult.OK)
             {
-                noteList.Note.Add(AddNote.CurrentNote);
-                FillListView(noteList);
+                Notes.Note.Add(AddNote.CurrentNote);
+                FillListView(Notes);
                 ProjectSave();
             }
         }
@@ -106,16 +108,18 @@ namespace NoteAppUI
             if (NoteList.SelectedIndices.Count != 0)
             {
                 NoteForm EditForm = new NoteForm();
-                int EditInd = NoteList.SelectedIndices[0];
-                var note = noteList.Note[EditInd];
+                int selectedIndex = (CategoryComboBox.Text == "All") ? NoteList.SelectedIndices[0]
+                    : GetNoteIndex(Notes.Note, sortNotes.Note);
+                var note = Notes.Note[selectedIndex];
                 EditForm.CurrentNote = note;
                 if (EditForm.ShowDialog() == DialogResult.OK)
                 {
-                    noteList.Note.RemoveAt(EditInd);
-                    NoteList.Items[EditInd].Remove();
-                    noteList.Note.Insert(EditInd, EditForm.CurrentNote);
+                    Notes.Note.RemoveAt(selectedIndex);
+                    NoteList.Items[selectedIndex].Remove();
+                    Notes.Note.Insert(selectedIndex, EditForm.CurrentNote);
                     ProjectSave();
-                    FillListView(noteList);
+                    FillListView(Notes);
+                    FilldListCategory();
                 }
             }
         }
@@ -143,10 +147,13 @@ namespace NoteAppUI
         {
             if (NoteList.SelectedIndices.Count != 0)
             {
-                int RemInd = NoteList.SelectedIndices[0];
-                noteList.Note.RemoveAt(RemInd);
-                NoteList.Items[RemInd].Remove();
+                int selectedIndex = (CategoryComboBox.Text == "All") ? NoteList.SelectedIndices[0]
+                    : GetNoteIndex(Notes.Note, sortNotes.Note);
+                Notes.Note.RemoveAt(selectedIndex);
+                NoteList.Items[selectedIndex].Remove();
                 ProjectSave();
+                FillListView(Notes);
+                FilldListCategory();
             }
         }
         /// <summary>
@@ -173,8 +180,8 @@ namespace NoteAppUI
             const string name = @"\NoteApp.notes";
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string file = path + name;
-            noteList = ProjectManager.LoadFromFile(file);
-            FillListView(noteList);
+            Notes = ProjectManager.LoadFromFile(file);
+            FillListView(Notes);
         }
 
         /// <summary>
@@ -211,7 +218,7 @@ namespace NoteAppUI
             const string name = @"\NoteApp.notes";
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string file = path + name;
-            ProjectManager.SaveToFile(noteList, file);
+            ProjectManager.SaveToFile(Notes, file);
         }
 
         public void FillCategoryItems()
@@ -223,5 +230,41 @@ namespace NoteAppUI
             }
             CategoryComboBox.SelectedIndex = 0;
         }
+
+        private int GetNoteIndex(List<Note> notes, List<Note> findedNotes)
+        {
+            int index = 0;
+
+            foreach (var note in notes)
+            {
+                if (note == findedNotes[NoteList.SelectedIndices[0]])
+                {
+                    return index;
+                }
+
+                index++;
+            }
+            return -1;
+        }
+
+        private void FilldListCategory()
+        {
+            if (CategoryComboBox.Text != "All")
+            {
+                sortNotes.Note = Notes.FindCategory(CategoryComboBox.Text);
+                FillListView(sortNotes);
+            }
+            else
+            {
+                FillListView(Notes);
+            }
+        }
+
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FilldListCategory();
+        }
+
+       
     }
 }

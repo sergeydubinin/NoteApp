@@ -18,8 +18,6 @@ namespace NoteApp
         /// </summary>
         private List<Note> _note;
 
-        public List<int> RealIndexes = new List<int>();
-
         /// <summary>
         /// Возвращает и задает список всех заметок
         /// </summary>
@@ -60,38 +58,19 @@ namespace NoteApp
             return sortingList;
         }
 
-        public List<Note> SortWithSelectionCategory(int category)
+        public List<Note> FindCategory(string value)
         {
-            var sortNotes = new List<Note>();
-
-            SortNotes(sortNotes);
-
-            //если выбрана категория All
-            if (category == 0)
+            List<Note> categoryList = new List<Note>();
+            CategoryNotes result;
+            foreach (var note in Note)
             {
-                RealIndexes.Clear();
-
-                for (int i = 0; i < Note.Count; i++)
+                if (Enum.TryParse(value, out result) && result == note.CategoryNotes)
                 {
-                    sortNotes.Add(Note[i]);
-                    RealIndexes.Add(i);
+                    categoryList.Add(note);
                 }
             }
-            //если другая категория
-            else
-            {
-                RealIndexes.Clear();
 
-                for (int i = 0; i < Note.Count; i++)
-                {
-                    if ((int)Note[i].CategoryNotes == category - 1)
-                    {
-                        sortNotes.Add(Note[i]);
-                        RealIndexes.Add(i);
-                    }
-                }
-            }
-            return sortNotes;
+            return categoryList;
         }
     }
 }
