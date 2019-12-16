@@ -18,6 +18,8 @@ namespace NoteApp
         /// </summary>
         private List<Note> _note;
 
+        public int CurrentNote = 0;
+
         /// <summary>
         /// Возвращает и задает список всех заметок
         /// </summary>
@@ -58,6 +60,9 @@ namespace NoteApp
             return sortingList;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public List<Note> FindCategory(string value)
         {
             List<Note> categoryList = new List<Note>();

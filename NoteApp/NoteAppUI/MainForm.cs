@@ -19,6 +19,9 @@ namespace NoteAppUI
         /// Создание объекта класса
         /// </summary>
         private Project Notes = new Project();
+        /// <summary>
+        /// Отсортировнный список заметок.
+        /// </summary>
         private readonly Project sortNotes = new Project();
 
         /// <summary>
@@ -29,19 +32,21 @@ namespace NoteAppUI
             InitializeComponent();
             NoteApp_Load();
             FillCategoryItems();
+            DisplayCurrentNote();
         }
 
         /// <summary>
         /// Заполнение списка заметок
         /// </summary>
-        public void FillListView(Project project)
+        private void FillListView(Project project)
         {
             if (NoteList.Items.Count > 0) NoteList.Items.Clear();
             var sortNotes = project.SortNotes();
             foreach (Note note in sortNotes)
             {
                 NoteList.Items.Add(note.Name);
-            }
+            }            
+
         }
 
         /// <summary>
@@ -57,30 +62,32 @@ namespace NoteAppUI
                 TextBox.Text = displayedNotes.Note[NoteList.SelectedIndices[0]].NoteText;
                 CreateTimePicker.Value = displayedNotes.Note[NoteList.SelectedIndices[0]].TimeOfCreation;
                 ChangeTimePicker.Value = displayedNotes.Note[NoteList.SelectedIndices[0]].LastChangeTime;
+                Notes.CurrentNote = (CategoryComboBox.Text == "All") ? NoteList.SelectedIndices[0]
+                    : GetNoteIndex(Notes.Note, sortNotes.Note);
             }
             else
             {
-                NameLabel.Text = string.Empty;
-                CategoryLabel.Text = string.Empty;
-                TextBox.Text = string.Empty;
-                CreateTimePicker.Value = DateTime.Now;
-                ChangeTimePicker.Value = DateTime.Now;
+                ClearDisplay();
             }
-
         }
 
         /// <summary>
         /// Метод добавления заметки
         /// </summary>
-        public void AddNote()
+        private void AddNote()
         {
             NoteForm AddNote = new NoteForm();
-            AddNote.CurrentNote = new Note();
+            AddNote.SelectedNote = new Note();
             if (AddNote.ShowDialog() == DialogResult.OK)
             {
-                Notes.Note.Add(AddNote.CurrentNote);
-                FillListView(Notes);
+                Notes.Note.Add(AddNote.SelectedNote);
+                Notes.CurrentNote = 0;                
                 ProjectSave();
+                FilldListCategory();
+                if (NoteList.Items.Count > 0)
+                {
+                    NoteList.Items[0].Selected = true;
+                }
             }
         }
 
@@ -103,7 +110,7 @@ namespace NoteAppUI
         /// <summary>
         /// Метод редактирования заметки
         /// </summary>
-        public void EditNote()
+        private void EditNote()
         {
             if (NoteList.SelectedIndices.Count != 0)
             {
@@ -111,15 +118,24 @@ namespace NoteAppUI
                 int selectedIndex = (CategoryComboBox.Text == "All") ? NoteList.SelectedIndices[0]
                     : GetNoteIndex(Notes.Note, sortNotes.Note);
                 var note = Notes.Note[selectedIndex];
-                EditForm.CurrentNote = note;
+                EditForm.SelectedNote = note;
                 if (EditForm.ShowDialog() == DialogResult.OK)
                 {
-                    Notes.Note.RemoveAt(selectedIndex);
-                    NoteList.Items[selectedIndex].Remove();
-                    Notes.Note.Insert(selectedIndex, EditForm.CurrentNote);
+                    //var selectedNote = sortNotes.Note[NoteList.SelectedIndices[0]];
+                    //var selectedIndex1 = Notes.Note.IndexOf(selectedNote);
+
+                    Notes.Note.RemoveAt(selectedIndex);                    
+                    Notes.Note.Insert(selectedIndex, EditForm.SelectedNote);
+                    if (Notes.CurrentNote == selectedIndex)
+                    {
+                        Notes.CurrentNote = 0;
+                    }
+                    FilldListCategory();                    
                     ProjectSave();
-                    FillListView(Notes);
-                    FilldListCategory();
+                    if (NoteList.Items.Count > 0)
+                    {
+                        NoteList.Items[0].Selected = true;
+                    }
                 }
             }
         }
@@ -143,17 +159,29 @@ namespace NoteAppUI
         /// <summary>
         /// Метод удаления заметки
         /// </summary>
-        public void RemoveNote()
+        private void RemoveNote()
         {
             if (NoteList.SelectedIndices.Count != 0)
             {
-                int selectedIndex = (CategoryComboBox.Text == "All") ? NoteList.SelectedIndices[0]
-                    : GetNoteIndex(Notes.Note, sortNotes.Note);
-                Notes.Note.RemoveAt(selectedIndex);
-                NoteList.Items[selectedIndex].Remove();
-                ProjectSave();
-                FillListView(Notes);
-                FilldListCategory();
+                if (MessageBox.Show("Вы уверены, что хотите удалить заметку: " + NoteList.SelectedItems[0].Text + "?", "Удаление", 
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    int selectedIndex = (CategoryComboBox.Text == "All") ? NoteList.SelectedIndices[0]
+                        : GetNoteIndex(Notes.Note, sortNotes.Note); 
+                    
+                    Notes.Note.RemoveAt(selectedIndex);                    
+                    if (Notes.CurrentNote == selectedIndex)
+                    {
+                        Notes.CurrentNote = 0;
+                    }
+                    ProjectSave();
+                    FilldListCategory();
+                    ClearDisplay();
+                    if (Notes.Note.Count > 0)
+                    {
+                        NoteList.Items[0].Selected = true;
+                    }
+                }
             }
         }
         /// <summary>
@@ -221,7 +249,10 @@ namespace NoteAppUI
             ProjectManager.SaveToFile(Notes, file);
         }
 
-        public void FillCategoryItems()
+        /// <summary>
+        /// Заполнение категорий заметок
+        /// </summary>
+        private void FillCategoryItems()
         {
             CategoryComboBox.Items.Add("All");
             foreach (CategoryNotes element in Enum.GetValues(typeof(CategoryNotes)))
@@ -231,6 +262,9 @@ namespace NoteAppUI
             CategoryComboBox.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Получение реального индекса заметки
+        /// </summary>
         private int GetNoteIndex(List<Note> notes, List<Note> findedNotes)
         {
             int index = 0;
@@ -247,8 +281,12 @@ namespace NoteAppUI
             return -1;
         }
 
+        /// <summary>
+        /// Метод заполнения списка заметок в зависимости от выбранной категории
+        /// </summary>
         private void FilldListCategory()
         {
+            ClearDisplay();
             if (CategoryComboBox.Text != "All")
             {
                 sortNotes.Note = Notes.FindCategory(CategoryComboBox.Text);
@@ -260,11 +298,44 @@ namespace NoteAppUI
             }
         }
 
+        /// <summary>
+        /// Заполнение списка заметок в зависимости от выбранной категории
+        /// </summary>
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             FilldListCategory();
         }
 
-       
+        /// <summary>
+        /// Отображение текущей заметки
+        /// </summary>
+        private void DisplayCurrentNote()
+        {
+            if (NoteList.Items.Count != 0)
+            {
+                int i = Notes.CurrentNote;
+                NoteList.Items[i].Selected = true;
+            }
+        }
+
+        /// <summary>
+        /// Очистка полей заметки
+        /// </summary>
+        private void ClearDisplay()
+        {
+            NameLabel.Text = string.Empty;
+            CategoryLabel.Text = string.Empty;
+            TextBox.Text = string.Empty;
+            CreateTimePicker.Value = DateTime.Now;
+            ChangeTimePicker.Value = DateTime.Now;
+        }        
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Delete)
+            {
+                RemoveNote();
+            }
+        }
     }
 }

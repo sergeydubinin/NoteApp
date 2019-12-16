@@ -177,9 +177,10 @@
             this.NoteList.Name = "NoteList";
             this.NoteList.Size = new System.Drawing.Size(307, 530);
             this.NoteList.TabIndex = 8;
+            this.NoteList.MultiSelect = false;
             this.NoteList.UseCompatibleStateImageBehavior = false;
             this.NoteList.View = System.Windows.Forms.View.Details;
-            this.NoteList.SelectedIndexChanged += new System.EventHandler(this.NoteList_SelectedIndexChanged);
+            this.NoteList.SelectedIndexChanged += new System.EventHandler(this.NoteList_SelectedIndexChanged);            
             // 
             // removeNoteButton
             // 
@@ -236,7 +237,7 @@
             this.CategoryComboBox.Location = new System.Drawing.Point(135, 12);
             this.CategoryComboBox.Name = "CategoryComboBox";
             this.CategoryComboBox.Size = new System.Drawing.Size(184, 24);
-            this.CategoryComboBox.TabIndex = 0;
+            this.CategoryComboBox.TabIndex = 1;
             this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             // 
             // NameLabel
@@ -321,11 +322,13 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(816, 409);
             this.Name = "MainForm";
             this.Text = "NoteApp";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);

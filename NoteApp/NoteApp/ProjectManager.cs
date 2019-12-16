@@ -21,7 +21,7 @@ namespace NoteApp
         public static void SaveToFile(Project data, string path)
         {
             //Создаём экземпляр сериализатора
-            JsonSerializer serializer = new JsonSerializer();
+            JsonSerializer serializer = new JsonSerializer { Formatting = Formatting.Indented }; 
 
             //Открываем поток для записи в файл с указанием пути
             using (StreamWriter sw = new StreamWriter(path))
@@ -42,7 +42,7 @@ namespace NoteApp
             Project project = null;
 
             //Создаём экземпляр сериализатора
-            JsonSerializer serializer = new JsonSerializer();
+            JsonSerializer serializer = new JsonSerializer { Formatting = Formatting.Indented };
 
             //Открываем поток для чтения из файла с указанием пути
             using (var sr = new StreamReader(path))
@@ -51,6 +51,7 @@ namespace NoteApp
                 //Вызываем десериализацию и явно преобразуем результат в целевой тип данных
                 project = serializer.Deserialize<Project>(reader);
             }
+                        
             return project;
         }
     }

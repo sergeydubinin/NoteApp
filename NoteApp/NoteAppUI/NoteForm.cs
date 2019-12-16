@@ -19,26 +19,26 @@ namespace NoteAppUI
         /// <summary>
         /// Текущая заметка
         /// </summary>
-        private Note _currentNote = new Note();
+        private Note _selectedNote = new Note();
 
         /// <summary>
         /// Возвращает и устанавливает значения для текущей заметки
         /// </summary>
-        public Note CurrentNote
+        public Note SelectedNote
         {
             get
             {
-                _currentNote.Name = TitleTextBox.Text;
-                _currentNote.CategoryNotes = (CategoryNotes)CategoryComboBox.SelectedItem;
-                _currentNote.NoteText = ContentTextBox.Text;
-                _currentNote.LastChangeTime = ModifiedDatePicker.Value;
-                _currentNote.TimeOfCreation = CreatedTimePicker.Value;
-                return _currentNote;
+                _selectedNote.Name = TitleTextBox.Text;
+                _selectedNote.CategoryNotes = (CategoryNotes)CategoryComboBox.SelectedItem;
+                _selectedNote.NoteText = ContentTextBox.Text;
+                _selectedNote.LastChangeTime = ModifiedDatePicker.Value;
+                _selectedNote.TimeOfCreation = CreatedTimePicker.Value;
+                return _selectedNote;
             }
 
             set
             {
-                _currentNote = value;
+                _selectedNote = value;
                 if (value != null)
                 {
                     TitleTextBox.Text = value.Name;
@@ -60,7 +60,7 @@ namespace NoteAppUI
         }
 
         /// <summary>
-        /// Зполняет категории заметки
+        /// Заполнение категорий заметок
         /// </summary>
         public void FillCategoryItems()
         {
@@ -105,7 +105,7 @@ namespace NoteAppUI
         }
 
         /// <summary>
-        /// Отоброжение всплывающих подсказок при вводе некорректного названия заметки
+        /// Отображение всплывающих подсказок при вводе некорректного названия заметки
         /// </summary>
         private void TitleTextBox_MouseEnter(object sender, EventArgs e)
         {
