@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NoteApp;
 
 namespace NoteApp
@@ -18,6 +15,9 @@ namespace NoteApp
         /// </summary>
         private List<Note> _note;
 
+        /// <summary>
+        /// Текущая заметка
+        /// </summary>
         public int CurrentNote = 0;
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace NoteApp
         }
 
         /// <summary>
-        /// 
+        /// Метод сортировки заметок по категориям
         /// </summary>
         public List<Note> FindCategory(string value)
         {

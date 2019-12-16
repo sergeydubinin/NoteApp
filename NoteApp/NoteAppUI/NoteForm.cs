@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NoteApp;
 
@@ -17,12 +11,12 @@ namespace NoteAppUI
     public partial class NoteForm : Form
     {
         /// <summary>
-        /// Текущая заметка
+        /// Выбранная заметка
         /// </summary>
         private Note _selectedNote = new Note();
 
         /// <summary>
-        /// Возвращает и устанавливает значения для текущей заметки
+        /// Возвращает и устанавливает значения для выбранной заметки
         /// </summary>
         public Note SelectedNote
         {
