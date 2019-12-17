@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>notebookicon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -117,5 +120,23 @@
   <ItemGroup>
     <None Include="Resources\document-delete.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="notebookicon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>rd /s /q $(SolutionDir)InstallScripts\Installers
+md $(SolutionDir)InstallScripts\Release 
+md $(SolutionDir)InstallScripts\Installers 
+xcopy $(ProjectDir)bin\Release\*.dll $(SolutionDir)InstallScripts\Release\ 
+xcopy $(ProjectDir)bin\Release\*.exe $(SolutionDir)InstallScripts\Release\ 
+"C:\Program Files (x86)\Inno Setup 6\ISCC.exe" $(SolutionDir)InstallScripts\InstallScripts.iss 
+xcopy $(SolutionDir)InstallScripts\Output\setup.exe $(SolutionDir)InstallScripts\Installers 
+rd /s /q $(SolutionDir)InstallScripts\Release
+rd /s /q $(SolutionDir)InstallScripts\Output</PostBuildEvent>
+  </PropertyGroup>
 </Project>

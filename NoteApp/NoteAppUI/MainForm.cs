@@ -79,9 +79,6 @@ namespace NoteAppUI
                 EditForm.SelectedNote = note;
                 if (EditForm.ShowDialog() == DialogResult.OK)
                 {
-                    //var selectedNote = sortNotes.Note[NoteList.SelectedIndices[0]];
-                    //var selectedIndex1 = Notes.Note.IndexOf(selectedNote);
-
                     Notes.Note.RemoveAt(selectedIndex);
                     Notes.Note.Insert(selectedIndex, EditForm.SelectedNote);
                     if (Notes.CurrentNote == selectedIndex)
